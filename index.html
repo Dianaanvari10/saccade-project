@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saccade-Conditioned Visualization</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="title-block">
+          <h1 class="app-title">Saccade-Conditioned Image Visualization</h1>
+          <p class="app-subtitle">
+            This interface is a conceptual visualization inspired by research on perceptual enhancement and suppression during active sensing. It is intended for hypothesis exploration rather than neural simulation.
+          </p>
+        </div>
+        <section class="controls-shell">
+          <div class="control-group">
+            <label class="control-label">Image</label>
+            <div class="control-row">
+              <label class="file-input-label">
+                <span>Upload</span>
+                <input id="file-input" type="file" accept="image/*" />
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Saccade direction</label>
+            <div class="control-row">
+              <canvas id="saccade-control" class="direction-pad"></canvas>
+            </div>
+            <div class="control-row control-row--input">
+              <label class="control-input-label" for="direction-input">Angle (°)</label>
+              <input id="direction-input" type="number" class="control-input-num" min="0" max="360" step="0.1" value="0" />
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Saccade amplitude</label>
+            <div class="control-row">
+              <input
+                id="amplitude-slider"
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0.5"
+                disabled
+              />
+              <span class="control-value">0.50</span>
+            </div>
+            <div class="control-row control-row--input">
+              <label class="control-input-label" for="amplitude-input">Value</label>
+              <input id="amplitude-input" type="number" class="control-input-num" min="0" max="1" step="0.01" value="0.5" />
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <main class="visualization-grid">
+        <section class="panel">
+          <header class="panel-header">
+            <h2 class="panel-title">Original</h2>
+          </header>
+          <div class="panel-body">
+            <canvas id="canvas-original" class="image-canvas"></canvas>
+          </div>
+        </section>
+
+        <section class="panel">
+          <header class="panel-header">
+            <h2 class="panel-title">Processed</h2>
+          </header>
+          <div class="panel-body">
+            <canvas id="canvas-processed" class="image-canvas"></canvas>
+          </div>
+        </section>
+
+        <section class="panel">
+          <header class="panel-header">
+            <h2 class="panel-title">Directional edge / detail map</h2>
+          </header>
+          <div class="panel-body">
+            <canvas id="canvas-directional" class="image-canvas"></canvas>
+          </div>
+        </section>
+
+        <section class="panel panel--wide panel--metrics">
+          <header class="panel-header">
+            <h2 class="panel-title">Directional summary metrics</h2>
+          </header>
+          <div class="panel-body panel-body--metrics">
+            <div class="metrics-row">
+              <span class="metrics-label">Mean directional edge alignment</span>
+              <span id="metric-mean-alignment" class="metrics-value">–</span>
+            </div>
+            <div class="metrics-row">
+              <span class="metrics-label">Directional high-frequency energy</span>
+              <span id="metric-dir-energy" class="metrics-value">–</span>
+            </div>
+            <div class="metrics-row">
+              <span class="metrics-label">Net signed modulation</span>
+              <span id="metric-net-mod" class="metrics-value">–</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+    </html>
